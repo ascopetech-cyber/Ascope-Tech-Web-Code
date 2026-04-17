@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ascope Tech – Build Skills. Build Future.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0b1f3a;
+  --navy-mid:#122d52;
+  --navy-light:#1a3d6e;
+  --gold:#e8a020;
+  --gold-light:#f5c454;
+  --cream:#fdf8f0;
+  --cream-dark:#f5ede0;
+  --text:#1a1a2e;
+  --text-mid:#4a5568;
+  --text-light:#718096;
+  --white:#ffffff;
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'Plus Jakarta Sans',sans-serif;
+  --shadow:0 4px 24px rgba(11,31,58,0.12);
+  --shadow-lg:0 12px 48px rgba(11,31,58,0.18);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--text);background:var(--cream);overflow-x:hidden}
+
+/* UTILITY */
+.container{max-width:1200px;margin:0 auto;padding:0 5vw}
+.section-label{font-size:.75rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
+.section-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:900;line-height:1.1;color:var(--navy);letter-spacing:-.02em}
+.section-title span{color:var(--gold)}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.8rem;border-radius:.375rem;font-weight:600;font-size:.9rem;cursor:pointer;border:none;font-family:var(--font-body);text-decoration:none;transition:all .2s}
+.btn-primary{background:var(--gold);color:var(--navy)}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,160,32,.35)}
+.btn-outline{background:transparent;color:var(--navy);border:2px solid var(--navy)}
+.btn-outline:hover{background:var(--navy);color:var(--white)}
+.btn-white{background:var(--white);color:var(--navy)}
+.btn-white:hover{background:var(--cream);transform:translateY(-1px)}
+.tag{display:inline-block;padding:.3rem .8rem;border-radius:2rem;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.tag-gold{background:rgba(232,160,32,.15);color:#b07800}
+.tag-navy{background:rgba(11,31,58,.1);color:var(--navy)}
+.tag-green{background:rgba(34,139,34,.12);color:#1a6b1a}
+
+/* PAGE SYSTEM */
+.page{display:none}
+.page.active{display:block}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(11,31,58,.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:68px}
+.nav-logo{font-family:var(--font-display);font-weight:900;font-size:1.4rem;color:var(--white);cursor:pointer;text-decoration:none}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:.25rem}
+.nav-link{color:rgba(255,255,255,.7);font-size:.875rem;font-weight:500;padding:.5rem 1rem;border-radius:.375rem;cursor:pointer;transition:all .2s;text-decoration:none;background:none;border:none;font-family:var(--font-body)}
+.nav-link:hover,.nav-link.active{color:var(--white);background:rgba(255,255,255,.1)}
+.nav-cta{background:var(--gold);color:var(--navy);padding:.55rem 1.4rem;border-radius:.375rem;font-weight:600;font-size:.875rem;cursor:pointer;border:none;font-family:var(--font-body);transition:all .2s}
+.nav-cta:hover{background:var(--gold-light)}
+.nav-mobile-toggle{display:none;background:none;border:none;color:var(--white);font-size:1.4rem;cursor:pointer}
+.nav-mobile{display:none;position:fixed;top:68px;left:0;right:0;background:var(--navy);padding:1rem 5vw 2rem;z-index:999;border-bottom:1px solid rgba(255,255,255,.1)}
+.nav-mobile.open{display:block}
+.nav-mobile .nav-link{display:block;padding:.75rem .5rem;border-bottom:1px solid rgba(255,255,255,.06)}
+
+/* HOME */
+.hero{min-height:100vh;background:var(--navy);position:relative;display:flex;align-items:center;overflow:hidden;padding-top:68px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 65% 50%,rgba(232,160,32,.12) 0%,transparent 60%),radial-gradient(ellipse 50% 80% at 10% 80%,rgba(26,61,110,.8) 0%,transparent 60%)}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding:5rem 0}
+.hero-label{font-size:.75rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem;display:flex;align-items:center;gap:.6rem}
+.hero-label::before{content:'';width:2rem;height:2px;background:var(--gold)}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4.2rem);font-weight:900;color:var(--white);line-height:1.05;letter-spacing:-.03em;margin-bottom:1.5rem}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero-sub{color:rgba(255,255,255,.65);font-size:1.05rem;line-height:1.7;margin-bottom:2.5rem;font-weight:300;max-width:480px}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.hero-stat{border-left:2px solid rgba(232,160,32,.4);padding-left:1rem}
+.hero-stat-num{font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--gold)}
+.hero-stat-label{font-size:.78rem;color:rgba(255,255,255,.5);font-weight:400;margin-top:.15rem}
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
+.hero-card-main{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:1rem;padding:2rem;max-width:360px;width:100%;backdrop-filter:blur(8px)}
+.hero-card-badge{background:var(--gold);color:var(--navy);font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .8rem;border-radius:2rem;display:inline-block;margin-bottom:1rem}
+.hero-card-title{color:var(--white);font-weight:600;font-size:1.05rem;margin-bottom:.5rem}
+.hero-card-meta{color:rgba(255,255,255,.45);font-size:.82rem;margin-bottom:1.25rem}
+.progress-bar{background:rgba(255,255,255,.12);border-radius:2rem;height:6px;margin-bottom:.4rem;overflow:hidden}
+.progress-fill{height:100%;border-radius:2rem;background:linear-gradient(90deg,var(--gold),var(--gold-light))}
+.progress-label{display:flex;justify-content:space-between;font-size:.75rem;color:rgba(255,255,255,.4)}
+.floating-badge{position:absolute;background:var(--white);border-radius:.75rem;padding:.75rem 1rem;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:.6rem}
+.floating-badge-icon{width:36px;height:36px;border-radius:.5rem;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.floating-badge-text{font-size:.78rem;font-weight:600;color:var(--text)}
+.floating-badge-sub{font-size:.68rem;color:var(--text-light)}
+.fb1{top:-1.5rem;right:-1rem}
+.fb2{bottom:-1rem;left:-2rem}
+
+/* HIGHLIGHTS */
+.highlights{padding:5rem 0;background:var(--white)}
+.highlights-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;margin-top:3rem}
+.highlight-card{text-align:center;padding:2.5rem 1.5rem;border-radius:.75rem;background:var(--cream);border:1px solid rgba(11,31,58,.06);transition:all .3s}
+.highlight-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:rgba(232,160,32,.3)}
+.highlight-icon{width:56px;height:56px;border-radius:1rem;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto 1.25rem}
+.highlight-card h3{font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.highlight-card p{color:var(--text-light);font-size:.85rem;line-height:1.6}
+
+/* FEATURED COURSES */
+.featured-courses{padding:6rem 0;background:var(--cream)}
+.courses-preview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:3rem}
+.course-card{background:var(--white);border-radius:.875rem;overflow:hidden;border:1px solid rgba(11,31,58,.08);transition:all .3s;cursor:pointer}
+.course-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.course-thumb{height:160px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative}
+.thumb-fullstack{background:linear-gradient(135deg,#1a3d6e,#0b1f3a)}
+.thumb-data{background:linear-gradient(135deg,#1a5c3a,#0d3d27)}
+.thumb-design{background:linear-gradient(135deg,#6b2d8b,#3d1a52)}
+.thumb-digital{background:linear-gradient(135deg,#8b2d1a,#52100d)}
+.thumb-java{background:linear-gradient(135deg,#1a4a6b,#0d2b3d)}
+.thumb-excel{background:linear-gradient(135deg,#2d6b1a,#1a4010)}
+.course-thumb-label{position:absolute;bottom:.75rem;left:.75rem;background:rgba(255,255,255,.15);color:var(--white);font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.25rem .6rem;border-radius:2rem;backdrop-filter:blur(4px)}
+.course-body{padding:1.25rem}
+.course-body h3{font-weight:600;font-size:1rem;color:var(--navy);margin-bottom:.4rem;line-height:1.35}
+.course-meta{display:flex;gap:.75rem;font-size:.78rem;color:var(--text-light);margin-bottom:1rem}
+.course-footer{display:flex;align-items:center;justify-content:space-between;padding-top:.75rem;border-top:1px solid rgba(11,31,58,.06)}
+.course-price{font-family:var(--font-display);font-size:1.3rem;font-weight:700;color:var(--navy)}
+.course-price span{font-size:.78rem;font-weight:400;color:var(--text-light);font-family:var(--font-body)}
+
+/* TESTIMONIALS */
+.testimonials{padding:6rem 0;background:var(--navy)}
+.testimonials .section-title{color:var(--white)}
+.testimonials .section-label{color:var(--gold-light)}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:3rem}
+.testi-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:.875rem;padding:1.75rem;transition:all .3s}
+.testi-card:hover{background:rgba(255,255,255,.09);transform:translateY(-2px)}
+.testi-stars{color:var(--gold);font-size:.9rem;margin-bottom:1rem;letter-spacing:.1em}
+.testi-text{color:rgba(255,255,255,.75);font-size:.9rem;line-height:1.7;margin-bottom:1.5rem;font-style:italic}
+.testi-author{display:flex;align-items:center;gap:.75rem}
+.testi-avatar{width:40px;height:40px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:var(--navy);flex-shrink:0}
+.testi-name{font-weight:600;font-size:.875rem;color:var(--white)}
+.testi-role{font-size:.75rem;color:rgba(255,255,255,.4)}
+
+/* PARTNERS */
+.partners{padding:4rem 0;background:var(--white);border-top:1px solid rgba(11,31,58,.06)}
+.partners-row{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;align-items:center;margin-top:2.5rem}
+.partner-pill{padding:.75rem 1.5rem;border-radius:.5rem;border:1px solid rgba(11,31,58,.1);font-weight:600;font-size:.85rem;color:var(--text-mid);background:var(--cream);transition:all .2s}
+.partner-pill:hover{border-color:var(--gold);color:var(--navy);background:rgba(232,160,32,.08)}
+
+/* COURSES PAGE */
+.page-hero{padding:8rem 0 4rem;background:var(--navy);text-align:center}
+.page-hero h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.5rem);font-weight:900;color:var(--white);letter-spacing:-.025em;margin-bottom:.75rem}
+.page-hero p{color:rgba(255,255,255,.6);font-size:1rem;max-width:500px;margin:0 auto}
+.filters-bar{background:var(--white);border-bottom:1px solid rgba(11,31,58,.08);padding:1rem 0;position:sticky;top:68px;z-index:50}
+.filters-inner{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}
+.filter-btn{padding:.5rem 1.1rem;border-radius:2rem;font-size:.82rem;font-weight:600;border:1.5px solid rgba(11,31,58,.15);background:transparent;color:var(--text-mid);cursor:pointer;font-family:var(--font-body);transition:all .2s}
+.filter-btn:hover,.filter-btn.active{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.filter-sep{width:1px;height:24px;background:rgba(11,31,58,.1);margin:0 .25rem}
+.courses-section{padding:4rem 0}
+.courses-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+.course-item{display:block}
+
+/* COURSE DETAIL PAGE */
+.course-detail-hero{padding:8rem 0 4rem;background:var(--navy)}
+.detail-grid{display:grid;grid-template-columns:1fr 340px;gap:3rem;align-items:start}
+.detail-breadcrumb{font-size:.8rem;color:rgba(255,255,255,.4);margin-bottom:1.5rem}
+.detail-breadcrumb span{color:rgba(255,255,255,.6);cursor:pointer}
+.detail-breadcrumb span:hover{color:var(--gold)}
+.detail-hero h1{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:900;color:var(--white);margin-bottom:1rem;line-height:1.15}
+.detail-meta-row{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.detail-meta-item{display:flex;align-items:center;gap:.4rem;font-size:.85rem;color:rgba(255,255,255,.6)}
+.detail-rating{display:flex;align-items:center;gap:.4rem;font-size:.85rem;color:var(--gold)}
+.enroll-card{background:var(--white);border-radius:1rem;padding:1.75rem;box-shadow:var(--shadow-lg);position:sticky;top:88px}
+.enroll-card-price{font-family:var(--font-display);font-size:2.2rem;font-weight:900;color:var(--navy);margin-bottom:.25rem}
+.enroll-card-price-original{font-size:.9rem;color:var(--text-light);text-decoration:line-through}
+.enroll-card-badge{background:rgba(34,139,34,.1);color:#1a6b1a;font-size:.75rem;font-weight:600;padding:.3rem .7rem;border-radius:2rem;margin-left:.5rem}
+.enroll-card .btn{width:100%;justify-content:center;margin-top:1rem;margin-bottom:.75rem;padding:1rem}
+.enroll-card-includes{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(11,31,58,.08)}
+.enroll-card-includes h4{font-size:.8rem;font-weight:600;color:var(--text-mid);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem}
+.include-item{display:flex;align-items:center;gap:.6rem;font-size:.85rem;color:var(--text-mid);margin-bottom:.5rem}
+.include-item::before{content:'✓';color:var(--gold);font-weight:700;font-size:.9rem}
+.detail-content{padding:4rem 0}
+.detail-content-grid{display:grid;grid-template-columns:1fr 340px;gap:3rem;align-items:start}
+.detail-tabs{display:flex;gap:0;border-bottom:2px solid rgba(11,31,58,.1);margin-bottom:2rem}
+.detail-tab{padding:.75rem 1.5rem;font-weight:600;font-size:.875rem;cursor:pointer;color:var(--text-light);border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;font-family:var(--font-body)}
+.detail-tab.active{color:var(--navy);border-bottom-color:var(--navy)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.module{border:1px solid rgba(11,31,58,.1);border-radius:.75rem;margin-bottom:.75rem;overflow:hidden}
+.module-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;cursor:pointer;background:var(--cream)}
+.module-header h4{font-weight:600;font-size:.9rem;color:var(--navy)}
+.module-header span{font-size:.78rem;color:var(--text-light)}
+.module-lessons{padding:1rem 1.25rem;border-top:1px solid rgba(11,31,58,.08)}
+.lesson{display:flex;align-items:center;gap:.75rem;padding:.4rem 0;font-size:.85rem;color:var(--text-mid)}
+.lesson::before{content:'▶';color:var(--gold);font-size:.6rem}
+.trainer-sidebar{background:var(--white);border-radius:.875rem;padding:1.5rem;border:1px solid rgba(11,31,58,.08)}
+.trainer-mini{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.trainer-mini-avatar{width:52px;height:52px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.trainer-mini-name{font-weight:700;color:var(--navy);font-size:.95rem}
+.trainer-mini-role{font-size:.78rem;color:var(--text-light)}
+.review-item{padding:1.25rem 0;border-bottom:1px solid rgba(11,31,58,.08)}
+.review-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem}
+.review-avatar{width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;color:var(--navy)}
+.review-name{font-weight:600;font-size:.875rem;color:var(--navy)}
+.review-date{font-size:.75rem;color:var(--text-light)}
+.review-stars{color:var(--gold);font-size:.8rem}
+.review-text{font-size:.875rem;color:var(--text-mid);line-height:1.65}
+
+/* TRAINERS PAGE */
+.trainers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem;padding:4rem 0}
+.trainer-card{background:var(--white);border-radius:.875rem;overflow:hidden;border:1px solid rgba(11,31,58,.08);transition:all .3s;text-align:center}
+.trainer-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.trainer-card-top{background:var(--navy);padding:2rem 1.5rem 3rem;position:relative}
+.trainer-avatar-big{width:80px;height:80px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto;border:3px solid rgba(255,255,255,.2)}
+.trainer-card-body{padding:1.5rem;margin-top:-1.5rem;position:relative}
+.trainer-name-card{background:var(--white);border-radius:.625rem;padding:1rem;box-shadow:var(--shadow);margin-bottom:1rem}
+.trainer-name{font-weight:700;font-size:1.05rem;color:var(--navy)}
+.trainer-title{font-size:.8rem;color:var(--text-light);margin-top:.2rem}
+.trainer-exp{font-size:.82rem;color:var(--gold);font-weight:600;margin-bottom:.75rem}
+.trainer-skills{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center}
+.skill-pill{background:var(--cream);color:var(--text-mid);font-size:.7rem;font-weight:600;padding:.25rem .6rem;border-radius:2rem;border:1px solid rgba(11,31,58,.08)}
+
+/* PLACEMENTS */
+.placements-hero-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:.875rem;padding:1.5rem;text-align:center}
+.placements-hero-stat-num{font-family:var(--font-display);font-size:2.5rem;font-weight:900;color:var(--gold)}
+.placements-hero-stat-label{font-size:.82rem;color:rgba(255,255,255,.55);margin-top:.25rem}
+.placements-hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.success-stories{padding:6rem 0;background:var(--cream)}
+.stories-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-top:3rem}
+.story-card{background:var(--white);border-radius:.875rem;padding:1.75rem;border:1px solid rgba(11,31,58,.08);transition:all .3s}
+.story-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.story-top{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem}
+.story-avatar{width:52px;height:52px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.story-name{font-weight:700;font-size:.95rem;color:var(--navy)}
+.story-course{font-size:.78rem;color:var(--text-light)}
+.story-company{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem}
+.company-badge{background:rgba(11,31,58,.06);padding:.35rem .75rem;border-radius:.375rem;font-size:.8rem;font-weight:600;color:var(--navy)}
+.story-salary{font-size:.85rem;color:#1a6b1a;font-weight:600;margin-bottom:.75rem}
+.story-text{font-size:.85rem;color:var(--text-mid);line-height:1.65;font-style:italic}
+.companies-section{padding:5rem 0;background:var(--white)}
+.companies-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem;margin-top:2.5rem}
+.company-card{border:1px solid rgba(11,31,58,.1);border-radius:.625rem;padding:1.25rem;text-align:center;font-weight:700;font-size:.9rem;color:var(--text-mid);background:var(--cream);transition:all .2s}
+.company-card:hover{border-color:var(--gold);color:var(--navy);background:rgba(232,160,32,.05)}
+.salary-section{padding:5rem 0;background:var(--navy)}
+.salary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-top:3rem}
+.salary-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:.875rem;padding:1.5rem;text-align:center}
+.salary-range{font-family:var(--font-display);font-size:1.5rem;font-weight:900;color:var(--gold);margin-bottom:.3rem}
+.salary-role{font-size:.85rem;color:rgba(255,255,255,.6)}
+
+/* CONTACT */
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;padding:4rem 0}
+.contact-info h2{font-family:var(--font-display);font-size:2rem;font-weight:900;color:var(--navy);margin-bottom:1rem}
+.contact-info p{color:var(--text-mid);line-height:1.7;margin-bottom:2rem}
+.contact-detail{display:flex;gap:1rem;margin-bottom:1.25rem}
+.contact-icon{width:44px;height:44px;border-radius:.625rem;background:rgba(232,160,32,.12);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.contact-detail-text strong{display:block;font-weight:600;color:var(--navy);font-size:.9rem}
+.contact-detail-text span{font-size:.85rem;color:var(--text-light)}
+.contact-form-card{background:var(--white);border-radius:1rem;padding:2.5rem;box-shadow:var(--shadow)}
+.contact-form-card h3{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--navy);margin-bottom:1.5rem}
+.form-group{margin-bottom:1.25rem}
+.form-group label{display:block;font-size:.82rem;font-weight:600;color:var(--text-mid);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.06em}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:.8rem 1rem;border-radius:.5rem;border:1.5px solid rgba(11,31,58,.12);font-family:var(--font-body);font-size:.9rem;color:var(--text);background:var(--cream);outline:none;transition:border-color .2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--navy)}
+.form-group textarea{resize:vertical;min-height:100px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.map-placeholder{height:300px;background:var(--cream-dark);border-radius:.875rem;border:1px solid rgba(11,31,58,.1);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;margin-top:2rem;text-align:center;color:var(--text-light)}
+
+/* AUTH */
+.auth-page{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--navy);padding:5rem 1rem}
+.auth-card{background:var(--white);border-radius:1.25rem;padding:2.5rem;width:100%;max-width:440px;box-shadow:var(--shadow-lg)}
+.auth-logo{text-align:center;margin-bottom:2rem}
+.auth-logo a{font-family:var(--font-display);font-size:1.5rem;font-weight:900;color:var(--navy);text-decoration:none}
+.auth-logo a span{color:var(--gold)}
+.auth-tabs{display:flex;background:var(--cream);border-radius:.625rem;padding:.25rem;margin-bottom:2rem}
+.auth-tab{flex:1;text-align:center;padding:.6rem;border-radius:.375rem;font-weight:600;font-size:.875rem;cursor:pointer;color:var(--text-mid);transition:all .2s}
+.auth-tab.active{background:var(--white);color:var(--navy);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.auth-form .btn{width:100%;justify-content:center;padding:1rem;font-size:.95rem;margin-top:.5rem}
+.auth-divider{text-align:center;color:var(--text-light);font-size:.8rem;margin:1.25rem 0;position:relative}
+.auth-divider::before{content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:rgba(11,31,58,.1)}
+.auth-divider span{background:var(--white);padding:0 1rem;position:relative}
+.forgot-link{font-size:.82rem;color:var(--gold);text-decoration:none;font-weight:500}
+.forgot-link:hover{text-decoration:underline}
+
+/* DASHBOARD */
+.dashboard-layout{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 68px)}
+.sidebar{background:var(--navy);padding:2rem 1.25rem;border-right:1px solid rgba(255,255,255,.08)}
+.sidebar-section{margin-bottom:2rem}
+.sidebar-section-label{font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.75rem;padding:0 .5rem}
+.sidebar-item{display:flex;align-items:center;gap:.75rem;padding:.65rem .75rem;border-radius:.5rem;color:rgba(255,255,255,.6);font-size:.875rem;font-weight:500;cursor:pointer;transition:all .2s;margin-bottom:.2rem}
+.sidebar-item:hover{background:rgba(255,255,255,.08);color:var(--white)}
+.sidebar-item.active{background:rgba(232,160,32,.15);color:var(--gold)}
+.sidebar-item-icon{width:20px;text-align:center;font-size:1rem}
+.dash-main{background:var(--cream);padding:2.5rem}
+.dash-greeting{margin-bottom:2rem}
+.dash-greeting h2{font-family:var(--font-display);font-size:1.75rem;font-weight:900;color:var(--navy)}
+.dash-greeting p{color:var(--text-light);font-size:.875rem;margin-top:.25rem}
+.dash-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2rem}
+.dash-stat{background:var(--white);border-radius:.75rem;padding:1.25rem;border:1px solid rgba(11,31,58,.06)}
+.dash-stat-num{font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--navy)}
+.dash-stat-label{font-size:.78rem;color:var(--text-light);margin-top:.2rem}
+.dash-section-title{font-weight:700;font-size:1rem;color:var(--navy);margin-bottom:1rem}
+.enrolled-courses{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-bottom:2rem}
+.enrolled-card{background:var(--white);border-radius:.75rem;padding:1.25rem;border:1px solid rgba(11,31,58,.06)}
+.enrolled-card-title{font-weight:600;font-size:.9rem;color:var(--navy);margin-bottom:.5rem}
+.enrolled-progress{margin-bottom:.5rem}
+.enrolled-progress-bar{background:rgba(11,31,58,.08);border-radius:2rem;height:6px;overflow:hidden}
+.enrolled-progress-fill{height:100%;border-radius:2rem;background:linear-gradient(90deg,var(--gold),var(--gold-light))}
+.enrolled-progress-text{font-size:.75rem;color:var(--text-light);margin-top:.35rem}
+.continue-btn{font-size:.8rem;color:var(--gold);font-weight:600;cursor:pointer;text-decoration:none}
+
+/* FOOTER */
+.footer{background:var(--navy);color:rgba(255,255,255,.6);padding:5rem 0 2rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-brand .nav-logo{font-size:1.5rem;display:block;margin-bottom:1rem}
+.footer-brand p{font-size:.85rem;line-height:1.7;max-width:280px}
+.footer-col h4{color:var(--white);font-weight:700;font-size:.875rem;margin-bottom:1.25rem;letter-spacing:.02em}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:.6rem}
+.footer-col ul li a{color:rgba(255,255,255,.5);font-size:.85rem;text-decoration:none;cursor:pointer;transition:color .2s}
+.footer-col ul li a:hover{color:var(--gold)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-bottom p{font-size:.8rem;color:rgba(255,255,255,.35)}
+.social-links{display:flex;gap:.75rem}
+.social-btn{width:36px;height:36px;border-radius:.375rem;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:.9rem;cursor:pointer;transition:all .2s;color:rgba(255,255,255,.5)}
+.social-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* SUCCESS MESSAGE */
+.success-toast{position:fixed;bottom:2rem;right:2rem;background:var(--navy);color:var(--white);padding:1rem 1.5rem;border-radius:.75rem;box-shadow:var(--shadow-lg);display:none;z-index:9999;align-items:center;gap:.75rem;font-size:.875rem;font-weight:500;border-left:3px solid var(--gold)}
+.success-toast.show{display:flex}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:3rem}
+  .hero-visual{display:none}
+  .detail-grid,.detail-content-grid{grid-template-columns:1fr}
+  .enroll-card{position:static}
+  .contact-layout{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .dashboard-layout{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .placements-hero-stats{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .nav-links{display:none}
+  .nav-mobile-toggle{display:block}
+  .footer-grid{grid-template-columns:1fr}
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .placements-hero-stats{grid-template-columns:1fr}
+  .detail-meta-row{gap:.75rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" onclick="showPage('home')">Ascope<span>Tech</span></a>
+    <div class="nav-links">
+      <button class="nav-link" onclick="showPage('home')" id="nav-home">Home</button>
+      <button class="nav-link" onclick="showPage('courses')" id="nav-courses">Courses</button>
+      <button class="nav-link" onclick="showPage('trainers')" id="nav-trainers">Trainers</button>
+      <button class="nav-link" onclick="showPage('placements')" id="nav-placements">Placements</button>
+      <button class="nav-link" onclick="showPage('contact')" id="nav-contact">Contact</button>
+    </div>
+    <div style="display:flex;gap:.75rem;align-items:center">
+      <button class="nav-link" onclick="showPage('auth')" style="color:rgba(255,255,255,.7)">Login</button>
+      <button class="nav-cta" onclick="showPage('courses')">Enroll Now</button>
+      <button class="nav-mobile-toggle" onclick="toggleMobile()">☰</button>
+    </div>
+  </div>
+</nav>
+<div class="nav-mobile" id="nav-mobile">
+  <button class="nav-link" onclick="showPage('home');toggleMobile()">Home</button>
+  <button class="nav-link" onclick="showPage('courses');toggleMobile()">Courses</button>
+  <button class="nav-link" onclick="showPage('trainers');toggleMobile()">Trainers</button>
+  <button class="nav-link" onclick="showPage('placements');toggleMobile()">Placements</button>
+  <button class="nav-link" onclick="showPage('contact');toggleMobile()">Contact</button>
+  <button class="nav-link" onclick="showPage('auth');toggleMobile()">Login / Sign Up</button>
+</div>
+
+<!-- ==================== HOME PAGE ==================== -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="container" style="position:relative;z-index:1">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-label">Premier EdTech Platform in Trichy</div>
+          <h1>Build Skills.<br>Build <em>Future</em><br>with Ascope Tech.</h1>
+          <p class="hero-sub">Transform your career with industry-ready courses, expert trainers, and guaranteed placement support. Join 1000+ students who already made the leap.</p>
+          <div class="hero-btns">
+            <button class="btn btn-primary" onclick="showPage('courses')">Explore Courses →</button>
+            <button class="btn btn-white" onclick="showPage('placements')">View Placements</button>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat-num">1200+</div>
+              <div class="hero-stat-label">Students Trained</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num">95%</div>
+              <div class="hero-stat-label">Placement Rate</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num">50+</div>
+              <div class="hero-stat-label">Hiring Partners</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-card-main">
+            <div class="hero-card-badge">🔥 Bestseller</div>
+            <div class="hero-card-title">Full Stack Web Development</div>
+            <div class="hero-card-meta">⏱ 6 Months &nbsp;·&nbsp; 180+ Hours &nbsp;·&nbsp; Live Classes</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:73%"></div></div>
+            <div class="progress-label"><span>Module 4/6 – React.js</span><span>73%</span></div>
+            <div style="margin-top:1.25rem;display:flex;align-items:center;gap:.75rem">
+              <div style="width:32px;height:32px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--navy)">RK</div>
+              <div style="font-size:.78rem;color:rgba(255,255,255,.6)">Instructor: <span style="color:rgba(255,255,255,.9);font-weight:600">Ravi Kumar</span></div>
+            </div>
+          </div>
+          <div class="floating-badge fb1">
+            <div class="floating-badge-icon" style="background:rgba(34,139,34,.1);font-size:1rem">🎓</div>
+            <div>
+              <div class="floating-badge-text">Priya got placed!</div>
+              <div class="floating-badge-sub">TCS — ₹6.5 LPA Package</div>
+            </div>
+          </div>
+          <div class="floating-badge fb2">
+            <div class="floating-badge-icon" style="background:rgba(232,160,32,.1)">⭐</div>
+            <div>
+              <div class="floating-badge-text">4.9 / 5 Rating</div>
+              <div class="floating-badge-sub">from 840+ reviews</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS -->
+  <section class="highlights">
+    <div class="container">
+      <div class="section-label">Why Choose Us</div>
+      <div class="section-title">Everything you need to<br><span>launch your career</span></div>
+      <div class="highlights-grid">
+        <div class="highlight-card">
+          <div class="highlight-icon">🎯</div>
+          <h3>Placement Guarantee</h3>
+          <p>We connect you with 50+ hiring partners. Dedicated placement team supports every student until they land their dream role.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">👨‍💻</div>
+          <h3>Expert Trainers</h3>
+          <p>Learn from industry professionals with 5–15 years of real-world experience at top product and service companies.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">🏗️</div>
+          <h3>Live Projects</h3>
+          <p>Build a portfolio that impresses employers. Every course includes hands-on projects based on real industry scenarios.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">📅</div>
+          <h3>Flexible Batches</h3>
+          <p>Morning, evening, and weekend batches available. Learn at your pace with lifetime access to recorded sessions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED COURSES -->
+  <section class="featured-courses">
+    <div class="container">
+      <div class="section-label">Popular Courses</div>
+      <div class="section-title">Top picks by our <span>students</span></div>
+      <div class="courses-preview-grid">
+        <div class="course-card" onclick="showCourseDetail('fullstack')">
+          <div class="course-thumb thumb-fullstack"><span>💻</span><div class="course-thumb-label">Development</div></div>
+          <div class="course-body">
+            <div class="tag tag-gold" style="margin-bottom:.6rem">Bestseller</div>
+            <h3>Full Stack Web Development (MERN)</h3>
+            <div class="course-meta"><span>⏱ 6 Months</span><span>⭐ 4.9 (420)</span></div>
+            <div class="course-footer">
+              <div class="course-price">₹18,999 <span>/ course</span></div>
+              <button class="btn btn-primary" style="padding:.5rem 1rem;font-size:.8rem">Enroll Now</button>
+            </div>
+          </div>
+        </div>
+        <div class="course-card" onclick="showCourseDetail('datascience')">
+          <div class="course-thumb thumb-data"><span>📊</span><div class="course-thumb-label">Data Science</div></div>
+          <div class="course-body">
+            <div class="tag tag-navy" style="margin-bottom:.6rem">Trending</div>
+            <h3>Data Science & Machine Learning</h3>
+            <div class="course-meta"><span>⏱ 5 Months</span><span>⭐ 4.8 (310)</span></div>
+            <div class="course-footer">
+              <div class="course-price">₹22,999 <span>/ course</span></div>
+              <button class="btn btn-primary" style="padding:.5rem 1rem;font-size:.8rem">Enroll Now</button>
+            </div>
+          </div>
+        </div>
+        <div class="course-card" onclick="showPage('courses')">
+          <div class="course-thumb thumb-digital"><span>📱</span><div class="course-thumb-label">Non-IT</div></div>
+          <div class="course-body">
+            <div class="tag tag-green" style="margin-bottom:.6rem">New</div>
+            <h3>Digital Marketing & SEO Mastery</h3>
+            <div class="course-meta"><span>⏱ 3 Months</span><span>⭐ 4.7 (185)</span></div>
+            <div class="course-footer">
+              <div class="course-price">₹9,999 <span>/ course</span></div>
+              <button class="btn btn-primary" style="padding:.5rem 1rem;font-size:.8rem">Enroll Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:2.5rem">
+        <button class="btn btn-outline" onclick="showPage('courses')">View All Courses →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-label">Student Stories</div>
+      <div class="section-title">Real results from<br><span>real students</span></div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Ascope Tech completely changed my career path. The MERN stack course was incredibly practical. I got placed at Infosys within 2 months of completing the course!"</p>
+          <div class="testi-author">
+            <div class="testi-avatar">PL</div>
+            <div><div class="testi-name">Priya Lakshmi</div><div class="testi-role">SDE at Infosys · ₹5.8 LPA</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"The Data Science course had the best curriculum I've seen. Trainers are from top companies and always available. Worth every rupee invested."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">KR</div>
+            <div><div class="testi-name">Karthik Raja</div><div class="testi-role">Data Analyst at TCS · ₹6.2 LPA</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"As a non-IT background student, I was nervous. Ascope Tech's Digital Marketing course gave me confidence and skills. Now running campaigns for a MNC!"</p>
+          <div class="testi-author">
+            <div class="testi-avatar">SD</div>
+            <div><div class="testi-name">Sneha Devi</div><div class="testi-role">Digital Marketing Lead · ₹4.5 LPA</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="partners">
+    <div class="container">
+      <div style="text-align:center">
+        <div class="section-label">Hiring Partners</div>
+        <div class="section-title" style="font-size:1.75rem">Trusted by leading companies</div>
+      </div>
+      <div class="partners-row">
+        <div class="partner-pill">TCS</div>
+        <div class="partner-pill">Infosys</div>
+        <div class="partner-pill">Wipro</div>
+        <div class="partner-pill">HCL</div>
+        <div class="partner-pill">Cognizant</div>
+        <div class="partner-pill">Tech Mahindra</div>
+        <div class="partner-pill">Zoho</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="nav-logo" onclick="showPage('home')">Ascope<span>Tech</span></a>
+          <p>Premier EdTech platform offering industry-ready courses, expert mentors, and guaranteed placement support across Chennai and beyond.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Courses</h4>
+          <ul>
+            <li><a onclick="showPage('courses')">Full Stack Dev</a></li>
+            <li><a onclick="showPage('courses')">Data Science</a></li>
+            <li><a onclick="showPage('courses')">Java Development</a></li>
+            <li><a onclick="showPage('courses')">UI/UX Design</a></li>
+            <li><a onclick="showPage('courses')">Digital Marketing</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a onclick="showPage('trainers')">Our Trainers</a></li>
+            <li><a onclick="showPage('placements')">Placements</a></li>
+            <li><a onclick="showPage('contact')">Contact Us</a></li>
+            <li><a>About Us</a></li>
+            <li><a>Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a>📞 +91 75400 86955</a></li>
+            <li><a>✉ info@ascopetech.in</a></li>
+            <li><a>📍 Tennur, Trichy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Ascope Tech. All rights reserved.</p>
+        <div class="social-links">
+          <div class="social-btn">in</div>
+          <div class="social-btn">tw</div>
+          <div class="social-btn">yt</div>
+          <div class="social-btn">ig</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ==================== COURSES PAGE ==================== -->
+<div class="page" id="page-courses">
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-label">All Courses</div>
+      <h1>Find Your Perfect Course</h1>
+      <p>From coding to design to digital marketing — build skills that employers want right now.</p>
+    </div>
+  </div>
+  <div class="filters-bar">
+    <div class="container">
+      <div class="filters-inner">
+        <button class="filter-btn active" onclick="filterCourses('all',this)">All Courses</button>
+        <div class="filter-sep"></div>
+        <button class="filter-btn" onclick="filterCourses('dev',this)">Development</button>
+        <button class="filter-btn" onclick="filterCourses('data',this)">Data & AI</button>
+        <button class="filter-btn" onclick="filterCourses('design',this)">Design</button>
+        <button class="filter-btn" onclick="filterCourses('nonit',this)">Non-IT</button>
+        <div class="filter-sep"></div>
+        <button class="filter-btn" onclick="filterCourses('beginner',this)">Beginner</button>
+        <button class="filter-btn" onclick="filterCourses('advanced',this)">Advanced</button>
+      </div>
+    </div>
+  </div>
+  <section class="courses-section">
+    <div class="container">
+      <div class="courses-grid" id="courses-grid">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </section>
+  <footer class="footer" style="margin-top:4rem">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2026 Ascope Tech. All rights reserved.</p>
+        <button class="btn btn-white" onclick="showPage('home')" style="font-size:.8rem;padding:.5rem 1rem">← Back to Home</button>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ==================== COURSE DETAIL PAGE ==================== -->
+<div class="page" id="page-detail">
+  <div class="course-detail-hero">
+    <div class="container">
+      <div class="detail-grid">
+        <div>
+          <div class="detail-breadcrumb">
+            <span onclick="showPage('courses')">Courses</span> › <span id="detail-category">Development</span> › <span id="detail-name">Course</span>
+          </div>
+          <div class="tag tag-gold" style="margin-bottom:1rem" id="detail-tag">Bestseller</div>
+          <h1 id="detail-title">Course Title</h1>
+          <p style="color:rgba(255,255,255,.65);margin:.75rem 0 1rem;font-size:.95rem;line-height:1.7" id="detail-desc">Course description here.</p>
+          <div class="detail-meta-row">
+            <div class="detail-rating" id="detail-rating">★★★★★ <span style="color:rgba(255,255,255,.6)">4.9 (420 reviews)</span></div>
+            <div class="detail-meta-item">👥 <span id="detail-students">1,240 students</span></div>
+            <div class="detail-meta-item">⏱ <span id="detail-duration">6 Months</span></div>
+            <div class="detail-meta-item">📶 <span id="detail-level">Beginner to Advanced</span></div>
+          </div>
+          <div class="detail-meta-item" style="margin-top:.5rem;color:rgba(255,255,255,.5);font-size:.82rem">Last updated: January 2026</div>
+        </div>
+        <div class="enroll-card">
+          <div>
+            <span class="enroll-card-price" id="detail-price">₹18,999</span>
+            <span class="enroll-card-price-original" id="detail-original">₹29,999</span>
+            <span class="enroll-card-badge">37% OFF</span>
+          </div>
+          <div style="color:#e53e3e;font-size:.78rem;font-weight:600;margin-top:.3rem">⏰ Offer ends in 2 days!</div>
+          <button class="btn btn-primary" onclick="showToast('Enrolled successfully! Our team will contact you shortly.')">Enroll Now</button>
+          <button class="btn btn-outline" style="width:100%;justify-content:center;margin-bottom:.5rem" onclick="showToast('Demo class booked for this Saturday 10 AM!')">Book Free Demo</button>
+          <div class="enroll-card-includes">
+            <h4>What's included</h4>
+            <div class="include-item">180+ hours of live training</div>
+            <div class="include-item">Lifetime recorded access</div>
+            <div class="include-item">5 real-world projects</div>
+            <div class="include-item">Industry certificate</div>
+            <div class="include-item">Placement assistance</div>
+            <div class="include-item">Doubt clearing sessions</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="detail-content">
+    <div class="container">
+      <div class="detail-content-grid">
+        <div>
+          <div class="detail-tabs">
+            <button class="detail-tab active" onclick="switchTab('overview',this)">Overview</button>
+            <button class="detail-tab" onclick="switchTab('syllabus',this)">Syllabus</button>
+            <button class="detail-tab" onclick="switchTab('reviews',this)">Reviews</button>
+          </div>
+          <div class="tab-content active" id="tab-overview">
+            <h3 style="font-family:var(--font-display);font-size:1.4rem;color:var(--navy);margin-bottom:1rem">What you'll learn</h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:2rem" id="detail-learnings"></div>
+            <h3 style="font-family:var(--font-display);font-size:1.2rem;color:var(--navy);margin-bottom:.75rem">Requirements</h3>
+            <ul style="color:var(--text-mid);font-size:.9rem;line-height:1.8;padding-left:1.2rem;margin-bottom:2rem" id="detail-requirements"></ul>
+          </div>
+          <div class="tab-content" id="tab-syllabus" id="detail-modules-wrap"></div>
+          <div class="tab-content" id="tab-reviews">
+            <div style="display:flex;align-items:center;gap:2rem;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid rgba(11,31,58,.08)">
+              <div style="text-align:center">
+                <div style="font-family:var(--font-display);font-size:4rem;font-weight:900;color:var(--navy);line-height:1">4.9</div>
+                <div style="color:var(--gold);font-size:1.2rem">★★★★★</div>
+                <div style="font-size:.78rem;color:var(--text-light);margin-top:.25rem">Course Rating</div>
+              </div>
+              <div style="flex:1">
+                <div style="font-size:.82rem;color:var(--text-light);margin-bottom:.5rem">420 ratings · 310 reviews</div>
+                <div style="background:rgba(11,31,58,.06);border-radius:2rem;height:6px;margin-bottom:.4rem;overflow:hidden"><div style="height:100%;width:78%;border-radius:2rem;background:var(--gold)"></div></div>
+                <div style="background:rgba(11,31,58,.06);border-radius:2rem;height:6px;margin-bottom:.4rem;overflow:hidden"><div style="height:100%;width:15%;border-radius:2rem;background:var(--gold)"></div></div>
+                <div style="background:rgba(11,31,58,.06);border-radius:2rem;height:6px;margin-bottom:.4rem;overflow:hidden"><div style="height:100%;width:5%;border-radius:2rem;background:var(--gold)"></div></div>
+                <div style="background:rgba(11,31,58,.06);border-radius:2rem;height:6px;overflow:hidden"><div style="height:100%;width:2%;border-radius:2rem;background:var(--gold)"></div></div>
+              </div>
+            </div>
+            <div class="review-item">
+              <div class="review-header"><div class="review-avatar">AK</div><div><div class="review-name">Arun Kumar</div><div class="review-date">March 2026</div></div><div class="review-stars" style="margin-left:auto">★★★★★</div></div>
+              <p class="review-text">Exceptional course! The MERN stack content is up-to-date and the trainer explained every concept with real examples. Got placed at a startup within 3 months!</p>
+            </div>
+            <div class="review-item">
+              <div class="review-header"><div class="review-avatar" style="background:var(--navy-light)">MS</div><div><div class="review-name">Meena Sundaram</div><div class="review-date">February 2026</div></div><div class="review-stars" style="margin-left:auto">★★★★★</div></div>
+              <p class="review-text">Best investment I've made in my career. The hands-on projects gave me real confidence. The placement support is genuine and effective.</p>
+            </div>
+            <div class="review-item">
+              <div class="review-header"><div class="review-avatar" style="background:#2d6b1a">VK</div><div><div class="review-name">Vijay Krishnan</div><div class="review-date">January 2026</div></div><div class="review-stars" style="margin-left:auto">★★★★☆</div></div>
+              <p class="review-text">Great course overall. A few advanced topics could use more depth, but the trainer always made time to address doubts personally. Highly recommend!</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="trainer-sidebar">
+            <h4 style="font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-light);margin-bottom:1rem">Your Trainer</h4>
+            <div class="trainer-mini">
+              <div class="trainer-mini-avatar" id="detail-trainer-avatar">👨‍💻</div>
+              <div>
+                <div class="trainer-mini-name" id="detail-trainer-name">Ravi Kumar</div>
+                <div class="trainer-mini-role" id="detail-trainer-role">Senior Full Stack Developer</div>
+              </div>
+            </div>
+            <div style="font-size:.82rem;color:var(--text-mid);line-height:1.65" id="detail-trainer-bio">8+ years of industry experience working with top product companies. Trained 400+ students. Passionate about making technology accessible.</div>
+            <button class="btn btn-outline" style="margin-top:1rem;width:100%;justify-content:center;font-size:.82rem" onclick="showPage('trainers')">View All Trainers</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2026 Ascope Tech. All rights reserved.</p>
+        <button class="btn btn-white" onclick="showPage('courses')" style="font-size:.8rem;padding:.5rem 1rem">← Back to Courses</button>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ==================== TRAINERS PAGE ==================== -->
+<div class="page" id="page-trainers">
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-label">Our Experts</div>
+      <h1>Meet Our Trainers</h1>
+      <p>Industry veterans with hands-on experience from top technology companies.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="trainers-grid">
+      <div class="trainer-card">
+        <div class="trainer-card-top"><div class="trainer-avatar-big">👨‍💻</div></div>
+        <div class="trainer-card-body">
+          <div class="trainer-name-card"><div class="trainer-name">Ravi Kumar</div><div class="trainer-title">Senior Full Stack Developer</div></div>
+          <div class="trainer-exp">🏢 Ex-Infosys · 8 Years Experience</div>
+          <div class="trainer-skills"><span class="skill-pill">React</span><span class="skill-pill">Node.js</span><span class="skill-pill">MongoDB</span><span class="skill-pill">AWS</span><span class="skill-pill">Docker</span></div>
+        </div>
+      </div>
+      <div class="trainer-card">
+        <div class="trainer-card-top" style="background:linear-gradient(135deg,#1a5c3a,#0d3d27)"><div class="trainer-avatar-big">👩‍🔬</div></div>
+        <div class="trainer-card-body">
+          <div class="trainer-name-card"><div class="trainer-name">Dr. Anitha Rajan</div><div class="trainer-title">Data Science Lead</div></div>
+          <div class="trainer-exp">🏢 Ex-Zoho · 12 Years Experience</div>
+          <div class="trainer-skills"><span class="skill-pill">Python</span><span class="skill-pill">ML</span><span class="skill-pill">TensorFlow</span><span class="skill-pill">SQL</span><span class="skill-pill">Power BI</span></div>
+        </div>
+      </div>
+      <div class="trainer-card">
+        <div class="trainer-card-top" style="background:linear-gradient(135deg,#6b2d8b,#3d1a52)"><div class="trainer-avatar-big">🎨</div></div>
+        <div class="trainer-card-body">
+          <div class="trainer-name-card"><div class="trainer-name">Deepa Mohan</div><div class="trainer-title">UI/UX Design Expert</div></div>
+          <div class="trainer-exp">🏢 Ex-Freshworks · 7 Years Experience</div>
+          <div class="trainer-skills"><span class="skill-pill">Figma</span><span class="skill-pill">Adobe XD</span><span class="skill-pill">Prototyping</span><span class="skill-pill">Research</span></div>
+        </div>
+      </div>
+      <div class="trainer-card">
+        <div class="trainer-card-top" style="background:linear-gradient(135deg,#1a4a6b,#0d2b3d)"><div class="trainer-avatar-big">☕</div></div>
+        <div class="trainer-card-body">
+          <div class="trainer-name-card"><div class="trainer-name">Suresh Pandi</div><div class="trainer-title">Java & DevOps Expert</div></div>
+          <div class="trainer-exp">🏢 Ex-HCL · 10 Years Experience</div>
+          <div class="trainer-skills"><span class="skill-pill">Java</span><span class="skill-pill">Spring Boot</span><span class="skill-pill">Jenkins</span><span class="skill-pill">Kubernetes</span></div>
+        </div>
+      </div>
+      <div class="trainer-card">
+        <div class="trainer-card-top" style="background:linear-gradient(135deg,#8b2d1a,#52100d)"><div class="trainer-avatar-big">📊</div></div>
+        <div class="trainer-card-body">
+          <div class="trainer-name-card"><div class="trainer-name">Kavitha Selvan</div><div class="trainer-title">Digital Marketing Strategist</div></div>
+          <div class="trainer-exp">🏢 Ex-Google Partner Agency · 9 Years</div>
+          <div class="trainer-skills"><span class="skill-pill">SEO</span><span class="skill-pill">Google Ads</span><span class="skill-pill">Social Media</span><span class="skill-pill">Analytics</span></div>
+        </div>
+      </div>
+      <div class="trainer-card">
+        <div class="trainer-card-top" style="background:linear-gradient(135deg,#2d6b1a,#1a4010)"><div class="trainer-avatar-big">📈</div></div>
+        <div class="trainer-card-body">
+          <div class="trainer-name-card"><div class="trainer-name">Muthu Selvam</div><div class="trainer-title">Business Analytics Expert</div></div>
+          <div class="trainer-exp">🏢 Ex-Capgemini · 11 Years Experience</div>
+          <div class="trainer-skills"><span class="skill-pill">Excel</span><span class="skill-pill">Tableau</span><span class="skill-pill">SAP</span><span class="skill-pill">JIRA</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="background:var(--navy);text-align:center;padding:5rem 2rem;margin-top:2rem">
+    <div class="section-label" style="color:var(--gold-light)">Join the Team</div>
+    <h2 style="font-family:var(--font-display);font-size:2.2rem;font-weight:900;color:var(--white);margin-bottom:1rem">Want to teach at Ascope Tech?</h2>
+    <p style="color:rgba(255,255,255,.6);margin-bottom:2rem;max-width:460px;margin-left:auto;margin-right:auto">We're always looking for passionate industry experts to join our trainer network. Competitive pay, flexible hours.</p>
+    <button class="btn btn-primary" onclick="showPage('contact')">Apply to Teach →</button>
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2026 Ascope Tech. All rights reserved.</p>
+        <button class="btn btn-white" onclick="showPage('home')" style="font-size:.8rem;padding:.5rem 1rem">← Back to Home</button>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ==================== PLACEMENTS PAGE ==================== -->
+<div class="page" id="page-placements">
+  <div class="page-hero" style="padding-bottom:3rem">
+    <div class="container">
+      <div class="section-label">Placement Record</div>
+      <h1>Our Students Get Hired</h1>
+      <p>95% placement rate. Real companies. Real packages. Real success stories.</p>
+      <div class="placements-hero-stats">
+        <div class="placements-hero-stat"><div class="placements-hero-stat-num">95%</div><div class="placements-hero-stat-label">Placement Rate</div></div>
+        <div class="placements-hero-stat"><div class="placements-hero-stat-num">₹8.2L</div><div class="placements-hero-stat-label">Highest Package</div></div>
+        <div class="placements-hero-stat"><div class="placements-hero-stat-num">50+</div><div class="placements-hero-stat-label">Hiring Partners</div></div>
+      </div>
+    </div>
+  </div>
+  <section class="success-stories">
+    <div class="container">
+      <div class="section-label">Success Stories</div>
+      <div class="section-title">Students who made it happen</div>
+      <div class="stories-grid">
+        <div class="story-card">
+          <div class="story-top"><div class="story-avatar">🧑</div><div><div class="story-name">Arun Prakash</div><div class="story-course">Full Stack Development</div></div></div>
+          <div class="story-company"><span class="company-badge">💼 TCS</span><span class="tag tag-green">Placed</span></div>
+          <div class="story-salary">💰 Package: ₹6.5 LPA</div>
+          <p class="story-text">"The placement team at Ascope Tech was phenomenal. They prepped me with 20+ mock interviews and resume reviews. Got my dream offer!"</p>
+        </div>
+        <div class="story-card">
+          <div class="story-top"><div class="story-avatar" style="background:linear-gradient(135deg,#6b2d8b,#3d1a52)">👩</div><div><div class="story-name">Priya Nair</div><div class="story-course">Data Science & ML</div></div></div>
+          <div class="story-company"><span class="company-badge">💼 Infosys</span><span class="tag tag-green">Placed</span></div>
+          <div class="story-salary">💰 Package: ₹5.8 LPA</div>
+          <p class="story-text">"From zero Python knowledge to a data analyst role in just 5 months. The curriculum is incredibly well structured and practical."</p>
+        </div>
+        <div class="story-card">
+          <div class="story-top"><div class="story-avatar" style="background:linear-gradient(135deg,#1a5c3a,#0d3d27)">🧑</div><div><div class="story-name">Karthik Sundar</div><div class="story-course">Java Development</div></div></div>
+          <div class="story-company"><span class="company-badge">💼 Wipro</span><span class="tag tag-green">Placed</span></div>
+          <div class="story-salary">💰 Package: ₹4.8 LPA</div>
+          <p class="story-text">"I was a mechanical engineer before. Ascope Tech helped me transition to IT smoothly. The Java course had exactly what industry needs."</p>
+        </div>
+        <div class="story-card">
+          <div class="story-top"><div class="story-avatar" style="background:linear-gradient(135deg,#8b2d1a,#52100d)">👩</div><div><div class="story-name">Lakshmi Devi</div><div class="story-course">Digital Marketing</div></div></div>
+          <div class="story-company"><span class="company-badge">💼 Hexaware</span><span class="tag tag-green">Placed</span></div>
+          <div class="story-salary">💰 Package: ₹4.2 LPA</div>
+          <p class="story-text">"Non-IT background but Ascope Tech's digital marketing course got me placed at a reputed company. Best decision of my career!"</p>
+        </div>
+        <div class="story-card">
+          <div class="story-top"><div class="story-avatar" style="background:var(--navy-light)">🧑</div><div><div class="story-name">Dinesh Raj</div><div class="story-course">UI/UX Design</div></div></div>
+          <div class="story-company"><span class="company-badge">💼 Freshworks</span><span class="tag tag-green">Placed</span></div>
+          <div class="story-salary">💰 Package: ₹7.2 LPA</div>
+          <p class="story-text">"The UI/UX program built a portfolio that wowed every interviewer. The trainer's industry connections directly helped with my placement."</p>
+        </div>
+        <div class="story-card">
+          <div class="story-top"><div class="story-avatar" style="background:linear-gradient(135deg,#2d6b1a,#1a4010)">👩</div><div><div class="story-name">Saranya Kumar</div><div class="story-course">Data Science & ML</div></div></div>
+          <div class="story-company"><span class="company-badge">💼 Zoho</span><span class="tag tag-green">Placed</span></div>
+          <div class="story-salary">💰 Package: ₹8.2 LPA</div>
+          <p class="story-text">"Highest package from our batch! The ML projects in my portfolio made all the difference. Ascope Tech genuinely cares about your success."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="companies-section">
+    <div class="container">
+      <div class="section-label">Hiring Partners</div>
+      <div class="section-title">Companies that hire from us</div>
+      <div class="companies-grid">
+        <div class="company-card">TCS</div>
+        <div class="company-card">Infosys</div>
+        <div class="company-card">Wipro</div>
+        <div class="company-card">HCL</div>
+        <div class="company-card">Cognizant</div>
+        <div class="company-card">Tech Mahindra</div>
+        <div class="company-card">Zoho</div>
+        <div class="company-card">Freshworks</div>
+        <div class="company-card">Hexaware</div>
+        <div class="company-card">Capgemini</div>
+        <div class="company-card">Accenture</div>
+        <div class="company-card">Mphasis</div>
+        <div class="company-card">LTI</div>
+        <div class="company-card">Mindtree</div>
+        <div class="company-card">Birlasoft</div>
+        <div class="company-card">KPIT</div>
+      </div>
+    </div>
+  </section>
+  <section class="salary-section">
+    <div class="container">
+      <div class="section-label" style="color:var(--gold-light)">Salary Packages</div>
+      <div class="section-title" style="color:var(--white)">What our <span>graduates earn</span></div>
+      <div class="salary-grid">
+        <div class="salary-card"><div class="salary-range">₹4–6 LPA</div><div class="salary-role">Full Stack Developer</div></div>
+        <div class="salary-card"><div class="salary-range">₹5–8 LPA</div><div class="salary-role">Data Scientist</div></div>
+        <div class="salary-card"><div class="salary-range">₹4–7 LPA</div><div class="salary-role">UI/UX Designer</div></div>
+        <div class="salary-card"><div class="salary-range">₹3.5–5 LPA</div><div class="salary-role">Java Developer</div></div>
+        <div class="salary-card"><div class="salary-range">₹3–5 LPA</div><div class="salary-role">Digital Marketer</div></div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2026 Ascope Tech. All rights reserved.</p>
+        <button class="btn btn-white" onclick="showPage('home')" style="font-size:.8rem;padding:.5rem 1rem">← Back to Home</button>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ==================== CONTACT PAGE ==================== -->
+<div class="page" id="page-contact">
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-label">Get in Touch</div>
+      <h1>Contact Ascope Tech</h1>
+      <p>Have questions? We'd love to hear from you. Reach out anytime.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="contact-layout">
+      <div class="contact-info">
+        <h2>Let's Start Your<br><span style="color:var(--gold)">Learning Journey</span></h2>
+        <p>Whether you're looking for course details, batch timings, or career guidance — our counselors are here to help you make the right choice.</p>
+        <div class="contact-detail">
+          <div class="contact-icon">📞</div>
+          <div class="contact-detail-text"><strong>Call Us</strong><span>+91 98765 43210 · Mon–Sat, 9 AM–7 PM</span></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">✉️</div>
+          <div class="contact-detail-text"><strong>Email Us</strong><span>hello@ascope.tech</span></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">📍</div>
+          <div class="contact-detail-text"><strong>Visit Us</strong><span>12, Tech Park, Tambaram, Chennai – 600045</span></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">💬</div>
+          <div class="contact-detail-text"><strong>WhatsApp</strong><span>+91 98765 43210 · Instant response</span></div>
+        </div>
+        <div class="map-placeholder">
+          <div style="font-size:2rem">🗺️</div>
+          <div style="font-weight:600;color:var(--navy)">Tambaram, Chennai</div>
+          <div style="font-size:.82rem">Google Maps embed would appear here</div>
+        </div>
+      </div>
+      <div>
+        <div class="contact-form-card">
+          <h3>Send us a Message</h3>
+          <div class="form-row">
+            <div class="form-group"><label>First Name</label><input type="text" placeholder="Your name"></div>
+            <div class="form-group"><label>Last Name</label><input type="text" placeholder="Last name"></div>
+          </div>
+          <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@email.com"></div>
+          <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+91 00000 00000"></div>
+          <div class="form-group"><label>Interested Course</label>
+            <select>
+              <option>Select a course</option>
+              <option>Full Stack Development (MERN)</option>
+              <option>Data Science & Machine Learning</option>
+              <option>Java Development</option>
+              <option>UI/UX Design</option>
+              <option>Digital Marketing</option>
+              <option>MS Excel & Business Analytics</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your background and goals..."></textarea></div>
+          <button class="btn btn-primary" style="width:100%;justify-content:center;padding:1rem;font-size:1rem;margin-top:.5rem" onclick="showToast('Message sent! Our counselor will call you within 2 hours.')">Send Message →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer" style="margin-top:4rem">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2026 Ascope Tech. All rights reserved.</p>
+        <button class="btn btn-white" onclick="showPage('home')" style="font-size:.8rem;padding:.5rem 1rem">← Back to Home</button>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ==================== AUTH PAGE ==================== -->
+<div class="page" id="page-auth">
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-logo"><a onclick="showPage('home')">Ascope<span>Tech</span></a></div>
+      <div class="auth-tabs">
+        <div class="auth-tab active" onclick="switchAuthTab('login',this)">Login</div>
+        <div class="auth-tab" onclick="switchAuthTab('signup',this)">Sign Up</div>
+      </div>
+      <div id="auth-login">
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@email.com"></div>
+        <div class="form-group">
+          <div style="display:flex;justify-content:space-between;margin-bottom:.4rem"><label style="margin:0">Password</label><a class="forgot-link">Forgot password?</a></div>
+          <input type="password" placeholder="••••••••">
+        </div>
+        <button class="btn btn-primary auth-form" onclick="showPageAfterLogin()">Login to Dashboard →</button>
+        <div class="auth-divider"><span>or continue with</span></div>
+        <button class="btn btn-outline" style="width:100%;justify-content:center;margin-bottom:.75rem" onclick="showPageAfterLogin()">🔵 Continue with Google</button>
+        <p style="text-align:center;font-size:.82rem;color:var(--text-light);margin-top:1rem">Don't have an account? <a style="color:var(--gold);font-weight:600;cursor:pointer" onclick="switchAuthTab('signup',null)">Sign up free</a></p>
+      </div>
+      <div id="auth-signup" style="display:none">
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="First name"></div>
+          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Last name"></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@email.com"></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+91 00000 00000"></div>
+        <div class="form-group"><label>Password</label><input type="password" placeholder="Create a strong password"></div>
+        <button class="btn btn-primary auth-form" onclick="showPageAfterLogin()">Create Account →</button>
+        <p style="text-align:center;font-size:.78rem;color:var(--text-light);margin-top:1rem">By signing up you agree to our <a style="color:var(--gold)">Terms</a> & <a style="color:var(--gold)">Privacy Policy</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== DASHBOARD PAGE ==================== -->
+<div class="page" id="page-dashboard">
+  <div class="dashboard-layout">
+    <div class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Main</div>
+        <div class="sidebar-item active">📊 <span>Dashboard</span></div>
+        <div class="sidebar-item">📚 <span>My Courses</span></div>
+        <div class="sidebar-item">📅 <span>Schedule</span></div>
+        <div class="sidebar-item">📝 <span>Assignments</span></div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Career</div>
+        <div class="sidebar-item" onclick="showPage('placements')">💼 <span>Placements</span></div>
+        <div class="sidebar-item">📄 <span>My Resume</span></div>
+        <div class="sidebar-item">🎯 <span>Mock Tests</span></div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Account</div>
+        <div class="sidebar-item">👤 <span>Profile</span></div>
+        <div class="sidebar-item">⚙️ <span>Settings</span></div>
+        <div class="sidebar-item" onclick="showPage('home')">🚪 <span>Logout</span></div>
+      </div>
+    </div>
+    <div class="dash-main">
+      <div class="dash-greeting">
+        <h2>Good morning, Priya! 👋</h2>
+        <p>You have 2 sessions this week. Keep up the great progress!</p>
+      </div>
+      <div class="dash-stats">
+        <div class="dash-stat"><div class="dash-stat-num">2</div><div class="dash-stat-label">Active Courses</div></div>
+        <div class="dash-stat"><div class="dash-stat-num">73%</div><div class="dash-stat-label">Avg. Progress</div></div>
+        <div class="dash-stat"><div class="dash-stat-num">12</div><div class="dash-stat-label">Hours This Month</div></div>
+        <div class="dash-stat"><div class="dash-stat-num">3</div><div class="dash-stat-label">Certificates Earned</div></div>
+      </div>
+      <div class="dash-section-title">My Enrolled Courses</div>
+      <div class="enrolled-courses">
+        <div class="enrolled-card">
+          <div style="font-size:1.5rem;margin-bottom:.5rem">💻</div>
+          <div class="enrolled-card-title">Full Stack Web Development (MERN)</div>
+          <div class="enrolled-progress">
+            <div class="enrolled-progress-bar"><div class="enrolled-progress-fill" style="width:73%"></div></div>
+            <div class="enrolled-progress-text">Module 4 of 6 · 73% complete</div>
+          </div>
+          <a class="continue-btn">Continue Learning →</a>
+        </div>
+        <div class="enrolled-card">
+          <div style="font-size:1.5rem;margin-bottom:.5rem">📊</div>
+          <div class="enrolled-card-title">Data Science & Machine Learning</div>
+          <div class="enrolled-progress">
+            <div class="enrolled-progress-bar"><div class="enrolled-progress-fill" style="width:28%"></div></div>
+            <div class="enrolled-progress-text">Module 2 of 7 · 28% complete</div>
+          </div>
+          <a class="continue-btn">Continue Learning →</a>
+        </div>
+      </div>
+      <div class="dash-section-title">Upcoming Sessions</div>
+      <div style="background:var(--white);border-radius:.75rem;border:1px solid rgba(11,31,58,.06);overflow:hidden">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;padding:1rem 1.25rem;font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-light);border-bottom:1px solid rgba(11,31,58,.06)"><span>Session</span><span>Date</span><span>Trainer</span><span></span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;padding:1rem 1.25rem;font-size:.875rem;align-items:center;border-bottom:1px solid rgba(11,31,58,.04)">
+          <span style="font-weight:600;color:var(--navy)">React.js – Hooks Deep Dive</span>
+          <span style="color:var(--text-mid)">Sat, 19 Apr · 10 AM</span>
+          <span style="color:var(--text-mid)">Ravi Kumar</span>
+          <span class="tag tag-gold">Live</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;padding:1rem 1.25rem;font-size:.875rem;align-items:center">
+          <span style="font-weight:600;color:var(--navy)">Python – Pandas & NumPy</span>
+          <span style="color:var(--text-mid)">Sun, 20 Apr · 2 PM</span>
+          <span style="color:var(--text-mid)">Dr. Anitha Rajan</span>
+          <span class="tag tag-navy">Upcoming</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="success-toast" id="toast">✅ <span id="toast-msg">Done!</span></div>
+
+<script>
+const COURSES = [
+  {id:'fullstack',cat:'dev',level:'beginner',emoji:'💻',thumb:'thumb-fullstack',tag:'Bestseller',tagType:'gold',title:'Full Stack Web Development (MERN)',duration:'6 Months',hours:'180+ Hours',rating:'4.9',reviews:'420',students:'1,240',price:'₹18,999',original:'₹29,999',desc:'Master HTML, CSS, JavaScript, React, Node.js, Express and MongoDB. Build production-ready web apps from scratch.',learnings:['HTML5 & CSS3 Mastery','JavaScript ES6+','React.js & Redux','Node.js & Express','MongoDB & Mongoose','REST API Development','Git & Version Control','AWS Deployment'],requirements:['Basic computer knowledge','Willingness to learn','No coding experience needed'],modules:[{title:'Module 1: Web Fundamentals',lessons:['HTML5 Structure & Semantics','CSS Flexbox & Grid','Responsive Design','Chrome DevTools']},{title:'Module 2: JavaScript',lessons:['ES6+ Syntax','DOM Manipulation','Async/Await & Promises','Fetch API']},{title:'Module 3: React.js',lessons:['Components & Props','State & Lifecycle','React Hooks','Redux Toolkit']},{title:'Module 4: Backend with Node.js',lessons:['Node.js Basics','Express Framework','REST API Design','Authentication & JWT']},{title:'Module 5: MongoDB',lessons:['NoSQL Concepts','Mongoose ODM','CRUD Operations','Aggregation']},{title:'Module 6: Deployment',lessons:['Git & GitHub','AWS EC2 Setup','CI/CD Pipeline','Final Project']}],trainerName:'Ravi Kumar',trainerRole:'Senior Full Stack Developer · Ex-Infosys',trainerBio:'8+ years at top product companies. Trained 400+ students with 95% placement success.',trainerAvatar:'👨‍💻'},
+  {id:'datascience',cat:'data',level:'advanced',emoji:'📊',thumb:'thumb-data',tag:'Trending',tagType:'navy',title:'Data Science & Machine Learning',duration:'5 Months',hours:'150+ Hours',rating:'4.8',reviews:'310',students:'860',price:'₹22,999',original:'₹35,000',desc:'From Python basics to ML model deployment. Learn pandas, scikit-learn, TensorFlow, and real-world data projects.',learnings:['Python for Data Science','NumPy & Pandas','Data Visualization','Machine Learning Algorithms','Deep Learning Basics','NLP Fundamentals','Model Deployment','SQL & Databases'],requirements:['Basic math understanding','Laptop with 8GB RAM','No Python experience needed'],modules:[{title:'Module 1: Python Foundations',lessons:['Python Syntax & Data Types','Functions & OOP','File Handling','Libraries Overview']},{title:'Module 2: Data Wrangling',lessons:['NumPy Arrays','Pandas DataFrames','Data Cleaning','EDA Techniques']},{title:'Module 3: Visualization',lessons:['Matplotlib & Seaborn','Plotly Dashboards','Storytelling with Data','BI Tools Overview']},{title:'Module 4: Machine Learning',lessons:['Supervised Learning','Unsupervised Learning','Model Evaluation','Hyperparameter Tuning']},{title:'Module 5: Deep Learning & NLP',lessons:['Neural Networks','TensorFlow & Keras','Sentiment Analysis','Model Deployment with Flask']}],trainerName:'Dr. Anitha Rajan',trainerRole:'Data Science Lead · Ex-Zoho',trainerBio:'12 years of industry experience. PhD in Computer Science. Published researcher in ML.',trainerAvatar:'👩‍🔬'},
+  {id:'java',cat:'dev',level:'beginner',emoji:'☕',thumb:'thumb-java',tag:'Popular',tagType:'navy',title:'Java Full Stack Development',duration:'5 Months',hours:'160+ Hours',rating:'4.7',reviews:'290',students:'750',price:'₹16,999',original:'₹25,000',desc:'Master Core Java, Spring Boot, Hibernate, and Angular. Build enterprise-grade applications.',learnings:['Core Java & OOP','Spring Boot Framework','Hibernate & JPA','Angular Frontend','REST APIs','MySQL Database','Maven & Gradle','Microservices Basics'],requirements:['Basic programming logic','No Java experience needed'],modules:[{title:'Module 1: Core Java',lessons:['OOP Concepts','Collections & Generics','Exception Handling','Multithreading']},{title:'Module 2: Spring Boot',lessons:['Spring Architecture','Spring MVC','Security & JWT','Testing']},{title:'Module 3: Angular',lessons:['TypeScript Basics','Angular Components','Services & HTTP','Routing']},{title:'Module 4: Database & Final Project',lessons:['MySQL','Hibernate ORM','Full Project Build','Deployment']}],trainerName:'Suresh Pandi',trainerRole:'Java & DevOps Expert · Ex-HCL',trainerBio:'10 years of Java enterprise development. Expert in Spring ecosystem and cloud architecture.',trainerAvatar:'☕'},
+  {id:'design',cat:'design',level:'beginner',emoji:'🎨',thumb:'thumb-design',tag:'Creative',tagType:'gold',title:'UI/UX Design Mastery',duration:'3 Months',hours:'90+ Hours',rating:'4.8',reviews:'180',students:'420',price:'₹12,999',original:'₹18,000',desc:'Learn Figma, design thinking, user research, and build a stunning portfolio that impresses top companies.',learnings:['Design Thinking Process','User Research Methods','Wireframing & Prototyping','Figma Mastery','Design Systems','Usability Testing','Portfolio Building','Handoff to Developers'],requirements:['Creative mindset','Basic computer skills','No design experience needed'],modules:[{title:'Module 1: Design Fundamentals',lessons:['Visual Design Principles','Color Theory','Typography','Layout & Grid']},{title:'Module 2: Figma Mastery',lessons:['Frames & Components','Auto Layout','Prototyping','Design Systems']},{title:'Module 3: UX Research',lessons:['User Interviews','Personas & Journey Maps','Usability Testing','A/B Testing']},{title:'Module 4: Portfolio & Capstone',lessons:['3 Real Project Builds','Case Study Writing','Behance Setup','Interview Prep']}],trainerName:'Deepa Mohan',trainerRole:'UI/UX Design Expert · Ex-Freshworks',trainerBio:'7 years designing products used by millions. Certified Google UX Designer. Mentor to 300+ students.',trainerAvatar:'🎨'},
+  {id:'digital',cat:'nonit',level:'beginner',emoji:'📱',thumb:'thumb-digital',tag:'New',tagType:'green',title:'Digital Marketing & SEO Mastery',duration:'3 Months',hours:'80+ Hours',rating:'4.7',reviews:'185',students:'380',price:'₹9,999',original:'₹15,000',desc:'Master SEO, Google Ads, Social Media Marketing, and Email Marketing to drive business growth.',learnings:['SEO On-Page & Off-Page','Google Ads (PPC)','Social Media Marketing','Email Marketing','Content Strategy','Analytics & Reporting','Affiliate Marketing','Personal Branding'],requirements:['Basic English communication','Smartphone or laptop','No prior marketing experience'],modules:[{title:'Module 1: Digital Marketing Overview',lessons:['Marketing Fundamentals','Website Basics','Google Analytics','Target Audience']},{title:'Module 2: SEO',lessons:['Keyword Research','On-Page SEO','Link Building','Technical SEO']},{title:'Module 3: Paid Advertising',lessons:['Google Ads Setup','Facebook Ads','Budget Optimization','Remarketing']},{title:'Module 4: Social & Content',lessons:['Content Calendar','Instagram & LinkedIn','Email Campaigns','Final Project']}],trainerName:'Kavitha Selvan',trainerRole:'Digital Marketing Strategist · Ex-Google Partner Agency',trainerBio:'9 years managing campaigns worth ₹10Cr+ budget. Certified Google & Meta Marketing Expert.',trainerAvatar:'📊'},
+  {id:'excel',cat:'nonit',level:'beginner',emoji:'📈',thumb:'thumb-excel',tag:'Practical',tagType:'navy',title:'MS Excel & Business Analytics',duration:'2 Months',hours:'60+ Hours',rating:'4.6',reviews:'220',students:'640',price:'₹6,999',original:'₹10,000',desc:'From Excel basics to advanced dashboards and business analytics. Perfect for non-technical professionals.',learnings:['Excel Formulas & Functions','Pivot Tables & Charts','Data Validation','Power Query & Power BI','Dashboard Creation','Business Reporting','VLOOKUP & Advanced Formulas','Financial Modeling Basics'],requirements:['Basic computer knowledge','No Excel experience needed'],modules:[{title:'Module 1: Excel Foundations',lessons:['Interface & Shortcuts','Basic Formulas','Formatting & Styles','Charts & Graphs']},{title:'Module 2: Advanced Excel',lessons:['VLOOKUP, INDEX/MATCH','Pivot Tables','Conditional Formatting','Data Validation']},{title:'Module 3: Power Tools & Analytics',lessons:['Power Query','Power BI Basics','Dashboard Design','Final Project']}],trainerName:'Muthu Selvam',trainerRole:'Business Analytics Expert · Ex-Capgemini',trainerBio:'11 years in business intelligence and ERP. Trained 500+ corporate professionals.',trainerAvatar:'📈'},
+];
+
+let activeFilter = 'all';
+
+function renderCourses(filter) {
+  const grid = document.getElementById('courses-grid');
+  const filtered = filter === 'all' ? COURSES : COURSES.filter(c => c.cat === filter || c.level === filter);
+  grid.innerHTML = filtered.map(c => `
+    <div class="course-card" onclick="showCourseDetail('${c.id}')">
+      <div class="course-thumb ${c.thumb}"><span>${c.emoji}</span><div class="course-thumb-label">${c.cat === 'dev' ? 'Development' : c.cat === 'data' ? 'Data & AI' : c.cat === 'design' ? 'Design' : 'Non-IT'}</div></div>
+      <div class="course-body">
+        <div class="tag tag-${c.tagType}" style="margin-bottom:.6rem">${c.tag}</div>
+        <h3>${c.title}</h3>
+        <div class="course-meta"><span>⏱ ${c.duration}</span><span>⭐ ${c.rating} (${c.reviews})</span><span>👥 ${c.students}</span></div>
+        <div class="course-footer">
+          <div class="course-price">${c.price} <span>/ course</span></div>
+          <button class="btn btn-primary" style="padding:.5rem 1rem;font-size:.8rem">Enroll Now</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterCourses(filter, btn) {
+  activeFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderCourses(filter);
+}
+
+function showCourseDetail(id) {
+  const c = COURSES.find(x => x.id === id);
+  if(!c) return;
+  document.getElementById('detail-category').textContent = c.cat === 'dev' ? 'Development' : c.cat === 'data' ? 'Data & AI' : c.cat === 'design' ? 'Design' : 'Non-IT';
+  document.getElementById('detail-name').textContent = c.title;
+  document.getElementById('detail-tag').textContent = c.tag;
+  document.getElementById('detail-title').textContent = c.title;
+  document.getElementById('detail-desc').textContent = c.desc;
+  document.getElementById('detail-rating').innerHTML = `★★★★★ <span style="color:rgba(255,255,255,.6)">${c.rating} (${c.reviews} reviews)</span>`;
+  document.getElementById('detail-students').textContent = c.students + ' students';
+  document.getElementById('detail-duration').textContent = c.duration;
+  document.getElementById('detail-level').textContent = 'Beginner to Advanced';
+  document.getElementById('detail-price').textContent = c.price;
+  document.getElementById('detail-original').textContent = c.original;
+  document.getElementById('detail-learnings').innerHTML = c.learnings.map(l => `<div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.875rem;color:var(--text-mid);padding:.3rem 0"><span style="color:var(--gold);font-weight:700">✓</span>${l}</div>`).join('');
+  document.getElementById('detail-requirements').innerHTML = c.requirements.map(r => `<li style="margin-bottom:.3rem">${r}</li>`).join('');
+  document.getElementById('tab-syllabus').innerHTML = c.modules.map((m,i) => `<div class="module"><div class="module-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'"><h4>${m.title}</h4><span>${m.lessons.length} lessons</span></div><div class="module-lessons" style="display:${i===0?'block':'none'}">${m.lessons.map(l=>`<div class="lesson">${l}</div>`).join('')}</div></div>`).join('');
+  document.getElementById('detail-trainer-name').textContent = c.trainerName;
+  document.getElementById('detail-trainer-role').textContent = c.trainerRole;
+  document.getElementById('detail-trainer-bio').textContent = c.trainerBio;
+  document.getElementById('detail-trainer-avatar').textContent = c.trainerAvatar;
+  document.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.detail-tab')[0].classList.add('active');
+  document.getElementById('tab-overview').classList.add('active');
+  showPage('detail');
+}
+
+function switchTab(tab, btn) {
+  document.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+
+function switchAuthTab(tab, btn) {
+  document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  else document.querySelectorAll('.auth-tab')[tab==='login'?0:1].classList.add('active');
+  document.getElementById('auth-login').style.display = tab === 'login' ? 'block' : 'none';
+  document.getElementById('auth-signup').style.display = tab === 'signup' ? 'block' : 'none';
+}
+
+function showPageAfterLogin() { showPage('dashboard'); }
+
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + name);
+  if(navEl) navEl.classList.add('active');
+  window.scrollTo(0,0);
+  if(name === 'courses') renderCourses(activeFilter);
+}
+
+function toggleMobile() {
+  document.getElementById('nav-mobile').classList.toggle('open');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 4000);
+}
+
+renderCourses('all');
+</script>
+</body>
+</html>
